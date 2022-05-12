@@ -16,6 +16,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+    <CategoryProvider>
     <div className="App">
       <BrowserRouter>
         <Header/>
@@ -27,6 +28,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+    </CategoryProvider>
     </ThemeProvider>
   );
 }
