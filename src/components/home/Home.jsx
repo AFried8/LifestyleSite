@@ -1,4 +1,4 @@
-import React, {useState, useReducer} from "react";
+import React, {useState, useReducer, useEffect} from "react";
 import {Box, Modal, Grid, Button, IconButton, Card, Typography, ToggleButton, ToggleButtonGroup} from '@mui/material';
 import PlayCircleIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import { useNavigate } from 'react-router-dom';
@@ -17,9 +17,10 @@ export const Home = () => {
     { id: 5, category: 'Random'}
   ];
 
-  const [currentCategory, categoryDispatch] = useContext(CategoryContext);
+  const [currentCategory, categoryDispatch] = useReducer(categoryReducer, {
+    category: 'noSelection',
+  });
   const [popup, setPopup] = useState(false);
-  
   function togglePopup(){
     const newStatus = !popup;
     setPopup(newStatus);
@@ -102,6 +103,19 @@ const PlayButton = (props) => {
 
 const Popup = (props) => {
   let navigate = useNavigate();
+  const [start, setStart] = useState(false);
+
+  // function handleClick() {
+  //   setStart(true);
+  //   navToPlay();
+  // }
+  function navToPlay() {
+    // if (start) {
+      navigate('/Play')
+    //}
+  }
+  
+  
   return (
     <div>
     <Modal
@@ -126,7 +140,7 @@ const Popup = (props) => {
         <Button 
           variant="contained" 
           color='success' 
-          onClick={navigate('/Play')}
+          onClick={navToPlay}
           endIcon={<StartIcon />}>
           Start
         </Button>

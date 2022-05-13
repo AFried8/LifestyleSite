@@ -7,7 +7,7 @@ import { Shuffle } from "@mui/icons-material";
 
 export const Play = () => {
 
-  const {currentCategory, catDispatch} = useContext(CategoryContext);
+  // const {currentCategory, catDispatch} = useContext(CategoryContext);
 
 
   const [currentQuestion, setCurrentQuestion] = useState(fetch("https://z36h06gqg7.execute-api.us-east-1.amazonaws.com/chats")
