@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
+import {TopScoresContext} from "../app/App"
 
 export const HighScores = () => {
+  const {topScores, setTopScores} = useContext(TopScoresContext);
   return (
-    <div>Highscores
+    <div>{topScores[0].score}
     </div>
   );
 };

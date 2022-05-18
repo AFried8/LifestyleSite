@@ -27,7 +27,7 @@ export const Home = () => {
   }
 
   return (
-    <div style={{padding: "20px"}}>
+    <div style={{padding: "20px", alignContent: 'center'}}>
       <Typography
         variant = "h1"
         style = {{padding: "16px", paddingBottom: "31px"}}>
@@ -58,7 +58,7 @@ const CategorySelection = (props) => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 10 }}>
       <ToggleButtonGroup
         value={props.currentCategory}
         exclusive
@@ -103,18 +103,10 @@ const PlayButton = (props) => {
 
 const Popup = (props) => {
   let navigate = useNavigate();
-  const [start, setStart] = useState(false);
 
-  // function handleClick() {
-  //   setStart(true);
-  //   navToPlay();
-  // }
   function navToPlay() {
-    // if (start) {
       navigate('/Play')
-    //}
   }
-  
   
   return (
     <div>

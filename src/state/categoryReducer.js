@@ -1,5 +1,5 @@
 
-export const CategoryReducer = (state, action) => {
+export function CategoryReducer(state, action) {
   switch (action.type) {
     case 'Geography':
       return { category: 'Geography', url: 'https://opentdb.com/api.php?amount=1&category=22&type=multiple'};

@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react';
 import {CategoryReducer} from './categoryReducer';
 
-export const CategoryContext = React.createContext();
+export const CategoryContext = React.createContext({category: 'noSelection'});
 
 export const CategoryProvider = () => {
 
@@ -9,11 +9,11 @@ export const CategoryProvider = () => {
 
     return (
         <CategoryContext.Provider
-        value = {{
-            currentCat,
-            catDispatch
-        }}
-        >
-        <CategoryContext.Provider/>
+            value = {{
+                currentCat,
+                catDispatch
+            }}
+        />
     )
+    
 }
