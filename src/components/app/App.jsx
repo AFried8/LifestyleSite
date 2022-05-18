@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {Header} from '../header/Header';
 import {Home} from '../home/Home';
 import {Play} from '../play/Play';
-import {Score} from '../score/Score';
+import {ShowScore} from '../showScore/ShowScore';
 import {HighScores} from '../highscores/HighScores';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {Theme} from '../../state/theme';
@@ -17,7 +17,7 @@ export const TopScoresContext = React.createContext();
 function App() {
 
   const [score, setScore] = useState(0);
-  const [topScores, setTopScores] = useState([{user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0},]);
+  const [topScores, setTopScores] = useState([{user: "", score: 5}, {user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0},]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -33,7 +33,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/play" element={<Play />} /> 
                 <Route path="/highscores" element={<HighScores />}/>
-                <Route path="/score" element={<Score />}/>
+                <Route path="/showScore" element={<ShowScore />}/>
             </Routes>
           </BrowserRouter>
           </div>

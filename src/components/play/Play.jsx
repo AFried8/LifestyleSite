@@ -166,28 +166,32 @@ const Message = () => {
 
 const GameOver = () => {
 
-  const {score, setScore} = useContext(ScoreContext);
+  const {myScore, setMyScore} = useContext(ScoreContext);
   const {topScores, setTopScores} = useContext(TopScoresContext);
   let navigate = useNavigate();
   
   
   const handleClick = () => {
-    if(score > topScores[4].score){
-      let id = 0;
+    if(myScore > topScores[4].score){
       let newArray = [];
+      let newScore = [{user: "", score: myScore}];
       for(let i = 0; i<topScores.length; i++){
+        console.log("listing topScores");
         console.log(topScores);
-        if(score > topScores[i].score){
+        if(myScore > topScores[i].score){
           newArray = topScores.slice(0, i);
-          newArray.concat({user: "", score: score});
-          newArray.concat(topScores.slice(i, 5));
+          newArray.concat(newScore, topScores.slice(i, 5));
           setTopScores(newArray);
           console.log("in if");
+          console.log("listing newArray");
           console.log(newArray);
-          i = 5;
+          i = 4;
         }
       }
       navigate('/highscores');
+    }
+    else {
+      navigate('/showScore');
     }
   }
 
@@ -204,7 +208,7 @@ const GameOver = () => {
         color="inherit"
         size = "large"
         onClick={handleClick}
-        style={{ fontSize: '40px' , margin: '40px', width: '100%'}}
+        style={{ fontSize: '40px' , margin: '40px', width: '75%'}}
       >
         next
       </Button>

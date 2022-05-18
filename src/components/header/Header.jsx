@@ -19,7 +19,6 @@ export const Header = () => {
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static" >
         <Toolbar>
-          {console.log("at home")}
             <Button 
                 color="inherit"
                 style = {{padding: "20px"}}

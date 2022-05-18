@@ -67,7 +67,7 @@ const CategorySelection = (props) => {
       >
         <Grid container spacing={1}>
           {props.categories.map((item) => (
-            <Grid item xs = "12">
+            <Grid item xs = {12}>
               <ToggleButton 
                 value={item.category} 
                 onClick={handleSelect}
