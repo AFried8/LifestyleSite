@@ -1,6 +1,6 @@
 import React from "react";
 import {useState, useEffect, useContext} from "react";
-import {Grid, Box, Typography} from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import {TimeContext} from '../play/Play'
 
 export const Timer = () => {
@@ -35,7 +35,6 @@ export const Timer = () => {
          <Typography variant='h2' style={{alignContent: 'center'}}> Time remaining </Typography>
          <Typography variant='h1' style={{alignContext: 'center'}}>
              {time.minutes}:{time.seconds < 10? 0: ''}{time.seconds}
-             {console.log(timesUp)}
          </Typography>
          </Box>
         </div>

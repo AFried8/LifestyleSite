@@ -81,18 +81,18 @@ export const Play = () => {
 const Question = (props) => {
 
   const currentAnswers = props.currentAnswers;
-  const {score, setScore} = useContext(ScoreContext);
+  const {currentScore, setCurrentScore} = useContext(ScoreContext);
 
   const handleButtonClick = (isCorrect, id)  => {
     currentAnswers[id-1].selected = true;
     let tempScore = 0;
     if (isCorrect) {
-			setScore(tempScore = score + 3);
+			setCurrentScore(tempScore = currentScore + 3);
 		}
     else {
-      setScore(tempScore = score-2);
+      setCurrentScore(tempScore = currentScore-2);
     }
-    setScore(tempScore);
+    setCurrentScore(tempScore);
   }
 
   return (
@@ -166,32 +166,29 @@ const Message = () => {
 
 const GameOver = () => {
 
-  const {myScore, setMyScore} = useContext(ScoreContext);
+  const {currentScore, setCurrentScore} = useContext(ScoreContext);
   const {topScores, setTopScores} = useContext(TopScoresContext);
   let navigate = useNavigate();
   
   
   const handleClick = () => {
-    if(myScore > topScores[4].score){
+    if(currentScore > topScores[4].score){
       let newArray = [];
-      let newScore = [{user: "", score: myScore}];
-      for(let i = 0; i<topScores.length; i++){
-        console.log("listing topScores");
-        console.log(topScores);
-        if(myScore > topScores[i].score){
-          newArray = topScores.slice(0, i);
-          newArray.concat(newScore, topScores.slice(i, 5));
-          setTopScores(newArray);
-          console.log("in if");
-          console.log("listing newArray");
-          console.log(newArray);
-          i = 4;
+      let newScore = {user: "", score: currentScore};
+      console.log(newScore);
+      
+      for(let i = 0; i< topScores.length; i++){
+        if(currentScore > topScores[i].score){
+            newArray = topScores.slice(0, i);
+            newArray = newArray.concat(newScore, topScores.slice(i, 4));
+            setTopScores(newArray);
+          i = topScores.length;
         }
       }
       navigate('/highscores');
     }
     else {
-      navigate('/showScore');
+      navigate('/score');
     }
   }
 
@@ -218,12 +215,12 @@ const GameOver = () => {
 
 
 const Score = (props) => {
-  const {score, setScore} = useContext(ScoreContext);
+  const {currentScore, setCurrentScore} = useContext(ScoreContext);
   return (
     <Box borderRadius={4} sx={{p: 2, mt: 2, border: '5px solid', backgroundColor: 'secondary.main'}}>
-         <Typography variant='h2'  style={{alignContent: 'center'}}> Score</Typography>
+         <Typography variant='h2'  style={{alignContent: 'center'}}> Score:</Typography>
          <Typography variant='h1' style={{alignContext: 'center'}}>
-           {score}
+           {currentScore}
          </Typography>
          </Box>
   )
