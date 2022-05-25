@@ -1,10 +1,10 @@
 import React from "react";
 import {useState, useContext} from "react";
-import {Grid, Box, Typography, Button, Stack} from '@mui/material';
+import {Grid, Box, Typography, Button, Stack, Modal, TextField} from '@mui/material';
 import "./Play.css";
 import {Timer} from "../timer/Timer";
+import {GameInfo} from "../gameInfo/GameInfo";
 import {ScoreContext, TopScoresContext} from "../app/App"
-import { useNavigate } from 'react-router-dom';
 
 export const TimeContext = React.createContext();
 
@@ -20,8 +20,9 @@ export const Play = () => {
 	
 
   const [currentAnswers, setCurrentAnswers] = useState([
-      {id: 1, Answer: 'Elon Musk', correct: true, selected: false},
-      {id: 2, Answer: 'Bill Gates', correct: false, selected: false},
+      
+      {id: 1, Answer: 'Bill Gates', correct: false, selected: false},
+      {id: 2, Answer: 'Elon Musk', correct: true, selected: false},
       {id: 3, Answer: 'Steve Jobs', correct: false, selected: false},
       {id: 4, Answer: 'Henry Ford', correct: false, selected: false}
     ]);
@@ -123,96 +124,16 @@ const Answer = (props) => {
   return (
     <Button 
       borderRadius={4}
-      className="answer"
       variant='outlined' 
       disabled={props.answerObject.selected || timesUp}
-      sx={{backgroundColor: 'primary.light', border: '5px solid',
-          '&:disabled': { backgroundColor: buttonDisabled, border: '5px solid', borderColor: 'primary.main', color: 'primary.main'},}}
+      sx={{ backgroundColor: 'primary.light', border: '5px solid', 
+          '&:disabled': {backgroundColor: buttonDisabled, border: '5px solid', borderColor: 'primary.main', color: 'black'},}}
       onClick={() => props.handleClick(props.answerObject.correct, props.answerObject.id)}
       >
       <Typography variant='h5'>{props.answerObject.Answer}</Typography>
     </Button>
   );
 }
-
-const GameInfo = (props) => {
-  const {timesUp, setTimesUp} = useContext(TimeContext);
-
-  if(timesUp){
-    return (<GameOver />);
-  }
-  else {
-    return (<Message/>);
-  }
-
-}
-
-const Message = () => {
-  
-  return (
-    <Box
-    borderRadius={4}
-    sx={{ p: 2, 
-          mt: '15px',
-          border: '5px solid', 
-          backgroundColor: 'primary.light', 
-          borderColor: 'primary.main'}}>
-      <Typography variant="h2">
-        Keep on going!
-      </Typography>
-    </Box>
-  );
-}
-
-const GameOver = () => {
-
-  const {currentScore, setCurrentScore} = useContext(ScoreContext);
-  const {topScores, setTopScores} = useContext(TopScoresContext);
-  let navigate = useNavigate();
-  
-  
-  const handleClick = () => {
-    if(currentScore > topScores[4].score){
-      let newArray = [];
-      let newScore = {user: "", score: currentScore};
-      console.log(newScore);
-      
-      for(let i = 0; i< topScores.length; i++){
-        if(currentScore > topScores[i].score){
-            newArray = topScores.slice(0, i);
-            newArray = newArray.concat(newScore, topScores.slice(i, 4));
-            setTopScores(newArray);
-          i = topScores.length;
-        }
-      }
-      navigate('/highscores');
-    }
-    else {
-      navigate('/score');
-    }
-  }
-
-  return (
-    <Box
-    borderRadius={4}
-    sx={{ p: 2, 
-          m: 2,
-          border: '5px solid', 
-          backgroundColor: 'primary.light', 
-          borderColor: 'primary.main'}}>
-      <Button 
-        variant = "outlined"
-        color="inherit"
-        size = "large"
-        onClick={handleClick}
-        style={{ fontSize: '40px' , margin: '40px', width: '75%'}}
-      >
-        next
-      </Button>
-    </Box>
-  )
-}
-
 
 const Score = (props) => {
   const {currentScore, setCurrentScore} = useContext(ScoreContext);
@@ -225,3 +146,4 @@ const Score = (props) => {
          </Box>
   )
 }
+
