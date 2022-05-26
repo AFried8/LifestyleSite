@@ -18,12 +18,7 @@ export const Play = () => {
   const [currentQuestion, setCurrentQuestion] =  useState();
   const [doneQuestion, setDoneQuestion] = useState(false);
 
-  const [currentAnswers, setCurrentAnswers] = useState([      
-    {id: 1, Answer: 'Bill Gates', correct: false, selected: false},
-    {id: 2, Answer: 'Elon Musk', correct: true, selected: false},
-    {id: 3, Answer: 'Steve Jobs', correct: false, selected: false},
-    {id: 4, Answer: 'Henry Ford', correct: false, selected: false}
-  ]);
+  const [currentAnswers, setCurrentAnswers] = useState([]);
 
   const categoryObjects = [
     { category: 'Geography', url: 'https://opentdb.com/api.php?amount=1&category=22&type=multiple'},
@@ -71,17 +66,6 @@ export const Play = () => {
     setCurrentAnswers(newArray2);
   }, [currentAnswer])
 
-    
-  
-
-  function handleClick() {
-    console.log(currentProblem);
-    console.log(currentAnswer);
-    console.log(correctAnswer);
-    console.log(currentQuestion);
-    console.log(category);
-    console.log(currentURL);
-  }
   
   return (
     <TimeContext.Provider
@@ -102,11 +86,7 @@ export const Play = () => {
             <Stack>
               <Timer/>
               <Score/>
-              <Button onClick = {handleClick}>
-              log
-              </Button>
-            </Stack>
-            
+            </Stack>            
           </Grid>
           </Grid>
       </div>
@@ -122,11 +102,11 @@ const Question = (props) => {
     currentAnswers[id-1].selected = true;
     let tempScore = 0;
     if (isCorrect) {
-			setCurrentScore(tempScore = currentScore + 3);
+			tempScore = currentScore + 3;
       props.setDoneQuestion(!props.doneQuestion);
 		}
     else {
-      setCurrentScore(tempScore = currentScore-2);
+      tempScore = currentScore-2;
     }
     setCurrentScore(tempScore);
   }

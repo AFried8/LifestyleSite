@@ -106,6 +106,7 @@ export const Score = () => {
           </Grid>
         </Stack>
         </Box>
+        
       </div>
   );
 }

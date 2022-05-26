@@ -42,11 +42,9 @@ const GameOver = () => {
 
     const highScore = currentScore > topScores[topScores.length-1].score;
     let navigate = useNavigate();
-    let scoreIndex = -1;
     
     function handleClick() {
       if(highScore) {
-          console.log("in if");
         let newArray = [];
         let newScore = {user: username, score: currentScore};
         
@@ -55,7 +53,6 @@ const GameOver = () => {
             newArray = topScores.slice(0, i);
             newArray = newArray.concat(newScore, topScores.slice(i, 4));
             setTopScores(newArray);
-            scoreIndex = i;
             i = topScores.length;
           }
         }
@@ -107,7 +104,6 @@ const GameOver = () => {
         props.handleClick();
       setOpen(false);
     }
-  
   
     return (
       <div>
