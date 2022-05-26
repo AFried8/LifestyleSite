@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, createRef} from 'react'
 import {Typography, Button, Box, Stack, Grid} from '@mui/material';
-import {ScoreContext} from "../app/App"
+import {ScoreContext, CategoryContext} from "../app/App"
 import HappyEmoji from '../../HappyEmoji.png'
 import badEmoji from '../../badEmoji.png'
 import { useScreenshot, createFileName } from 'use-react-screenshot';
@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 export const Score = () => {
 
   const {currentScore, setCurrentScore} = useContext(ScoreContext);
+  const {category, setCategory} = useContext(CategoryContext); 
   const ref = createRef(null);
   const [image, takeScreenShot] = useScreenshot()
   let navigate = useNavigate();
@@ -33,6 +34,8 @@ export const Score = () => {
   }, [image])
 
   function replayClicked() {
+    setCurrentScore(0);
+    setCategory(-1);
     navigate('/');
   }
 

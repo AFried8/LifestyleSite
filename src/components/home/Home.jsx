@@ -44,8 +44,8 @@ export const Home = () => {
 const CategorySelection = (props) => {
 
   const handleSelect = (event, selectedCategory) => {
-    if(props.currentCategory.category == selectedCategory){
-      props.setCategory('');
+    if(props.currentCategory == selectedCategory){
+      props.setCategory(-1);
     }
     else {
       props.setCategory(selectedCategory);
@@ -59,16 +59,15 @@ const CategorySelection = (props) => {
         value={props.currentCategory}
         exclusive
         onChange={handleSelect}
-        aria-label="text alignment"
       >
         <Grid container spacing={1}>
           {props.categories.map((item) => (
             <Grid item xs = {12}>
-              <ToggleButton 
+              <ToggleButton
                 value={item.id} 
                 onClick={handleSelect}
                 >
-              <Card sx={{ minWidth: 500}}>
+              <Card sx={{ minWidth: 500, backgroundColor: props.currentCategory==item.id? 'lightgray': 'white'}}>
                 <Typography 
                   sx={{ fontSize: 30}} 
                   color="text.secondary" gutterBottom>

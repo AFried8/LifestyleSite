@@ -7,29 +7,30 @@ import {Score} from '../score/Score';
 import {HighScores} from '../highscores/HighScores';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {Theme} from '../../state/theme';
-// import {CategoryProvider} from '../../state/categoryReducer'
+import {ScoreContextProvider} from '../../state/scoreContext'
 import {ThemeProvider} from '@mui/material/styles';
 
 const theme = Theme;
 
-export const ScoreContext = React.createContext();
+// export const ScoreContext = React.createContext();
 export const TopScoresContext = React.createContext();
 export const CategoryContext = React.createContext();
 
 function App() {
 
-  const [currentScore, setCurrentScore] = useState(0);
+  // const [currentScore, setCurrentScore] = useState(0);
   const [topScores, setTopScores] = useState([{user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0},]);
-  const [category, setCategory] = useState(4);
+  const [category, setCategory] = useState(-1);
 
   return (
     <ThemeProvider theme={theme}>
       <CategoryContext.Provider value={{category, setCategory}}>
-      <ScoreContext.Provider
-          value={{currentScore, setCurrentScore}}>
+        <ScoreContextProvider>
+      {/* <ScoreContext.Provider
+          value={{currentScore, setCurrentScore}}>*/}
         <TopScoresContext.Provider 
           value={{topScores, setTopScores}}
-          >
+          > 
           <div className="App">
           <BrowserRouter>
             <Header/>
@@ -41,8 +42,10 @@ function App() {
             </Routes>
           </BrowserRouter>
           </div>
+          
           </TopScoresContext.Provider>
-      </ScoreContext.Provider>
+          </ScoreContextProvider>
+      {/* </ScoreContext.Provider> */}
       </CategoryContext.Provider>
     </ThemeProvider>
   );

@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import {useState, useContext} from "react";
-import {Grid, Box, Typography, Button, Stack, Modal, TextField} from '@mui/material';
+import {Grid, Box, Typography, Button, Stack} from '@mui/material';
 import "./Play.css";
 import {Timer} from "../timer/Timer";
 import {GameInfo} from "../gameInfo/GameInfo";
-import {ScoreContext, CategoryContext} from "../app/App";
-import { useNavigate } from 'react-router-dom';
+import {CategoryContext} from "../app/App";
 
 export const TimeContext = React.createContext();
 

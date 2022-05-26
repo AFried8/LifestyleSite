@@ -24,6 +24,10 @@ export const Theme = createTheme({
         main: '#d32f2f',
         light: '#ef5350'
       },
+
+      grey: {
+        light: 'D3D3D3'
+      },
       contrastThreshold: 3,
       tonalOffset: 0.2,
     },

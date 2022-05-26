@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, createRef} from 'react'
-import {TopScoresContext} from "../app/App"
+import {TopScoresContext, ScoreContext, CategoryContext} from "../app/App"
 import {Typography, Box, Button, Stack, Grid} from '@mui/material';
 import { useScreenshot, createFileName } from 'use-react-screenshot';
 import CameraAlt from '@mui/icons-material/CameraAlt';
@@ -7,7 +7,9 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import { useNavigate } from 'react-router-dom';
 
 export const HighScores = () => {
+  const {currentScore, setCurrentScore} = useContext(ScoreContext);
   const {topScores, setTopScores} = useContext(TopScoresContext);
+  const {category, setCategory} = useContext(CategoryContext); 
   let currentIndex = 1;
   let navigate = useNavigate();
 
@@ -30,6 +32,8 @@ export const HighScores = () => {
   }, [image])
 
   function replayClicked() {
+    setCurrentScore(0);
+    setCategory(-1);
     navigate('/');
   }
 
