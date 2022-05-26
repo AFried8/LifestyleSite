@@ -1,19 +1,12 @@
-import React, {useReducer} from 'react';
-import {CategoryReducer} from './categoryReducer';
+import React, { useState } from "react";
 
-export const CategoryContext = React.createContext({category: 'noSelection'});
+export const CategoryContext = React.createContext();
 
-export const CategoryProvider = () => {
-
-    const [currentCat, catDispatch] = useReducer(CategoryReducer, {category: 'noSelection'});
-
-    return (
-        <CategoryContext.Provider
-            value = {{
-                currentCat,
-                catDispatch
-            }}
-        />
-    )
-    
-}
+export const CategoryProvider = (props) => {
+  const [category, setCategory] = useState('');
+  return (
+    <CategoryContext.Provider value={{ category, setCategory }}>
+      {props.children}
+    </CategoryContext.Provider>
+  );
+};

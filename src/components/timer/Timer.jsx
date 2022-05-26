@@ -5,7 +5,7 @@ import {TimeContext} from '../play/Play'
 
 export const Timer = () => {
 
-    const [time, setTime] = useState({minutes: 0, seconds: 5});;
+    const [time, setTime] = useState({minutes: 0, seconds: 20});
     const {timesUp, setTimesUp} = useContext(TimeContext);
 
     useEffect (() => {
@@ -31,9 +31,9 @@ export const Timer = () => {
 
     return (
         <div>
-        <Box borderRadius={4} sx={{p: 2, border: '5px solid', backgroundColor: 'accent.main'}}>
-         <Typography variant='h2' style={{alignContent: 'center'}}> Time remaining </Typography>
-         <Typography variant='h1' style={{alignContext: 'center'}}>
+        <Box borderRadius={4} sx={{p: 2, border: '5px solid', backgroundColor: 'primary.main'}}>
+         <Typography variant='h2' style={{alignContent: 'center', color: 'white'}}> Time remaining </Typography>
+         <Typography variant='h1' style={{alignContext: 'center', color: 'white'}}>
              {time.minutes}:{time.seconds < 10? 0: ''}{time.seconds}
          </Typography>
          </Box>

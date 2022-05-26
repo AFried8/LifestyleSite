@@ -1,25 +1,21 @@
-import React, {useState, useReducer, useEffect} from "react";
+import React, {useState, useReducer, useEffect, useContext} from "react";
 import {Box, Modal, Grid, Button, IconButton, Card, Typography, ToggleButton, ToggleButtonGroup} from '@mui/material';
 import PlayCircleIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import { useNavigate } from 'react-router-dom';
-import {CategoryReducer} from '../../state/categoryReducer';
+import {CategoryContext} from '../app/App';
 import StartIcon from '@mui/icons-material/Start';
-
-const categoryReducer = CategoryReducer;
 
 export const Home = () => {
   
   const categories = [
-    { id: 1, category: 'Geography'},
-    { id: 2, category: 'History'},
-    { id: 3, category: 'Animals'},
-    { id: 4, category: 'Sports'},
-    { id: 5, category: 'Random'}
+    { id: 0, category: 'Geography'},
+    { id: 1, category: 'History'},
+    { id: 2, category: 'Animals'},
+    { id: 3, category: 'Sports'},
+    { id: 4, category: 'Random'}
   ];
 
-  const [currentCategory, categoryDispatch] = useReducer(categoryReducer, {
-    category: 'noSelection',
-  });
+  const {category, setCategory} = useContext(CategoryContext);
   const [popup, setPopup] = useState(false);
   function togglePopup(){
     const newStatus = !popup;
@@ -35,10 +31,10 @@ export const Home = () => {
       </Typography>
       <CategorySelection
         categories={categories}
-        currentCategory = {currentCategory}
-        setCategory = {categoryDispatch}
+        currentCategory = {category}
+        setCategory = {setCategory}
       />
-      <PlayButton category={currentCategory} openPopup={togglePopup}/>
+      <PlayButton category={category} openPopup={togglePopup}/>
       <Popup open={popup}/>
       
     </div>
@@ -49,10 +45,10 @@ const CategorySelection = (props) => {
 
   const handleSelect = (event, selectedCategory) => {
     if(props.currentCategory.category == selectedCategory){
-      props.setCategory({type: 'noSelection'});
+      props.setCategory('');
     }
     else {
-      props.setCategory({type : selectedCategory});
+      props.setCategory(selectedCategory);
     }
     console.log(props.currentCategory);
   };
@@ -69,7 +65,7 @@ const CategorySelection = (props) => {
           {props.categories.map((item) => (
             <Grid item xs = {12}>
               <ToggleButton 
-                value={item.category} 
+                value={item.id} 
                 onClick={handleSelect}
                 >
               <Card sx={{ minWidth: 500}}>
