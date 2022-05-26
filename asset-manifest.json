@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/TriviaGame/static/css/main.fed8a1d1.css",
+    "main.js": "/TriviaGame/static/js/main.d1619ff7.js",
+    "static/js/787.0fe84981.chunk.js": "/TriviaGame/static/js/787.0fe84981.chunk.js",
+    "static/media/badEmoji.png": "/TriviaGame/static/media/badEmoji.89c6629a0db41ec36fac.png",
+    "static/media/Logo.png": "/TriviaGame/static/media/Logo.a452594c7ec8a7f808c0.png",
+    "static/media/HappyEmoji.png": "/TriviaGame/static/media/HappyEmoji.13b4b61d1e3759716732.png",
+    "index.html": "/TriviaGame/index.html",
+    "main.fed8a1d1.css.map": "/TriviaGame/static/css/main.fed8a1d1.css.map",
+    "main.d1619ff7.js.map": "/TriviaGame/static/js/main.d1619ff7.js.map",
+    "787.0fe84981.chunk.js.map": "/TriviaGame/static/js/787.0fe84981.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fed8a1d1.css",
+    "static/js/main.d1619ff7.js"
+  ]
+}
