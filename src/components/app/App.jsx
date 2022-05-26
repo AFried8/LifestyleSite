@@ -7,7 +7,8 @@ import {Score} from '../score/Score';
 import {HighScores} from '../highscores/HighScores';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {Theme} from '../../state/theme';
-import {ThemeProvider, createTheme } from '@mui/material/styles';
+import {CategoryContextProvider} from '../../state/categoryReducer'
+import {ThemeProvider} from '@mui/material/styles';
 
 const theme = Theme;
 
@@ -17,10 +18,11 @@ export const TopScoresContext = React.createContext();
 function App() {
 
   const [currentScore, setCurrentScore] = useState(0);
-  const [topScores, setTopScores] = useState([{user: "", score: 5}, {user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0},]);
+  const [topScores, setTopScores] = useState([{user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0},]);
 
   return (
     <ThemeProvider theme={theme}>
+      <CategoryContextProvider>
       <ScoreContext.Provider
           value={{currentScore, setCurrentScore}}>
         <TopScoresContext.Provider 
@@ -39,6 +41,7 @@ function App() {
           </div>
           </TopScoresContext.Provider>
       </ScoreContext.Provider>
+      </CategoryContextProvider>
     </ThemeProvider>
   );
 }

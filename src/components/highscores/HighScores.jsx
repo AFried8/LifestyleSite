@@ -73,7 +73,7 @@ export const HighScores = () => {
 
 const HighScore = (props) => {
    
-  const displayScore = props.highscore.user == ""? "": props.highscore.score;
+  const displayScore = props.highscore.score == 0? "": props.highscore.score;
   return (
     
     <Box component="p" sx={{m: 4, mr:15, ml:15, alignContent: 'center', backgroundColor: 'secondary.main', borderRadius: 2 }}>

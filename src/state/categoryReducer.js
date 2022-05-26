@@ -1,5 +1,7 @@
+import React, {useReducer} from 'react';
 
-export function CategoryReducer(state, action) {
+
+const CategoryReducer = (state, action) => {
   switch (action.type) {
     case 'Geography':
       return { category: 'Geography', url: 'https://opentdb.com/api.php?amount=1&category=22&type=multiple'};
@@ -15,5 +17,17 @@ export function CategoryReducer(state, action) {
         return {category: 'noSelection'}
     default:
       throw new Error(`Count Reducer does not recognize ${action.type}`);
-  }
+  };
 }
+
+export const CategoryContext = React.createContext();
+
+export const CategoryContextProvider = (props) => {
+  const [category, categoryDispatch] = useReducer(CategoryReducer, 'noSelection');
+  return (
+    <CategoryContext.Provider
+      value={{category: category, categoryDispatch: categoryDispatch }}
+    >
+    </CategoryContext.Provider>
+  );
+};

@@ -7,11 +7,13 @@ import {GameInfo} from "../gameInfo/GameInfo";
 import {ScoreContext, TopScoresContext} from "../app/App"
 
 export const TimeContext = React.createContext();
+export const CorrectSelectedContext = React.createContext();
 
 export const Play = () => {
 
   const [timesUp, setTimesUp] = useState(false);
-  // const {currentCategory, catDispatch} = useContext(CategoryContext);
+  const [correctSelected, setCorrectSelected] = useState(false);
+
   const [correctAnswer, setCorrectAnswer] = ([]);
   
   const [currentQuestion, setCurrentQuestion] =  useState(fetch("https://opentdb.com/api.php?amount=1&category=22&type=multiple")
@@ -55,26 +57,25 @@ export const Play = () => {
   }
   
   return (
-    <TimeContext.Provider
-      value = {{
-        timesUp, setTimesUp
-      }}>
-      <div>
-        <Grid container spacing={2} padding='20px'>
-          <Grid item xs={8}>
-            <Question
-              currentAnswers={currentAnswers}/>
-            <GameInfo/>
-          </Grid>
-          <Grid item xs={4}>
-            <Stack>
-              <Timer/>
-              <Score/>
-            </Stack>
-            
-          </Grid>
-          </Grid>
-      </div>
+    <TimeContext.Provider value = {{timesUp, setTimesUp }}>
+      <CorrectSelectedContext.Provider value = {{correctSelected, setCorrectSelected}}>
+        <div>
+          <Grid container spacing={2} padding='20px'>
+            <Grid item xs={8}>
+              <Question
+                currentAnswers={currentAnswers}/>
+              <GameInfo/>
+            </Grid>
+            <Grid item xs={4}>
+              <Stack>
+                <Timer/>
+                <Score/>
+              </Stack>
+              
+            </Grid>
+            </Grid>
+        </div>
+      </CorrectSelectedContext.Provider>
     </TimeContext.Provider>
   );
 };
@@ -83,12 +84,14 @@ const Question = (props) => {
 
   const currentAnswers = props.currentAnswers;
   const {currentScore, setCurrentScore} = useContext(ScoreContext);
+  const {correctSelected, setCorrectSelected} = useContext(CorrectSelectedContext);
 
   const handleButtonClick = (isCorrect, id)  => {
     currentAnswers[id-1].selected = true;
     let tempScore = 0;
     if (isCorrect) {
 			setCurrentScore(tempScore = currentScore + 3);
+      setCorrectSelected(true);
 		}
     else {
       setCurrentScore(tempScore = currentScore-2);
@@ -119,13 +122,14 @@ const Question = (props) => {
 }
 const Answer = (props) => {
 
-  const buttonDisabled = props.answerObject.correct? 'success.main': 'error.main';
   const {timesUp, setTimesUp} = useContext(TimeContext);
+  const {correctSelected, setCorrectSelected} = useContext(CorrectSelectedContext);
+  const buttonDisabled = props.answerObject.correct? 'success.main': 'error.main';
   return (
     <Button 
       borderRadius={4}
       variant='outlined' 
-      disabled={props.answerObject.selected || timesUp}
+      disabled={props.answerObject.selected || timesUp || correctSelected}
       sx={{ backgroundColor: 'primary.light', border: '5px solid', 
           '&:disabled': {backgroundColor: buttonDisabled, border: '5px solid', borderColor: 'primary.main', color: 'black'},}}
       onClick={() => props.handleClick(props.answerObject.correct, props.answerObject.id)}

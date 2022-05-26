@@ -1,11 +1,11 @@
-import React, {useState, useReducer, useEffect} from "react";
+import React, {useState, useReducer, useEffect, useContext} from "react";
 import {Box, Modal, Grid, Button, IconButton, Card, Typography, ToggleButton, ToggleButtonGroup} from '@mui/material';
 import PlayCircleIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import { useNavigate } from 'react-router-dom';
-import {CategoryReducer} from '../../state/categoryReducer';
+import {CategoryContext} from '../../state/categoryReducer'
 import StartIcon from '@mui/icons-material/Start';
 
-const categoryReducer = CategoryReducer;
+
 
 export const Home = () => {
   
@@ -17,9 +17,7 @@ export const Home = () => {
     { id: 5, category: 'Random'}
   ];
 
-  const [currentCategory, categoryDispatch] = useReducer(categoryReducer, {
-    category: 'noSelection',
-  });
+  const categoryContext = useContext(CategoryContext);
   const [popup, setPopup] = useState(false);
   function togglePopup(){
     const newStatus = !popup;
@@ -35,10 +33,10 @@ export const Home = () => {
       </Typography>
       <CategorySelection
         categories={categories}
-        currentCategory = {currentCategory}
-        setCategory = {categoryDispatch}
+        currentCategory = {categoryContext.category}
+        setCategory = {CategoryContext.categoryDispatch}
       />
-      <PlayButton category={currentCategory} openPopup={togglePopup}/>
+      <PlayButton category={categoryContext.category} openPopup={togglePopup}/>
       <Popup open={popup}/>
       
     </div>
