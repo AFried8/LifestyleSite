@@ -80,6 +80,7 @@ export const HighScores = () => {
             <Typography variant='h5'>Take Screenshot</Typography>
             </Button>
           </Grid>
+          
           <Grid item xs={6}>
           <Button 
               startIcon = {<ReplayIcon style={{fontSize: 40}}/>}

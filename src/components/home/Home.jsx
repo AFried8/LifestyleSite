@@ -84,7 +84,7 @@ const CategorySelection = (props) => {
 }
 
 const PlayButton = (props) => {
-  const buttonColor = props.category.category == 'noSelection'?  ['#AEAEAE']: ['#3ACF3A'];
+  const buttonColor = props.category == -1?  ['#AEAEAE']: ['#3ACF3A'];
   
   return (
     <IconButton 

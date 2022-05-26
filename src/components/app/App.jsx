@@ -5,34 +5,32 @@ import {Home} from '../home/Home';
 import {Play} from '../play/Play';
 import {Score} from '../score/Score';
 import {HighScores} from '../highscores/HighScores';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {HashRouter, Routes, Route} from "react-router-dom";
 import {Theme} from '../../state/theme';
-import {ScoreContextProvider} from '../../state/scoreContext'
 import {ThemeProvider} from '@mui/material/styles';
 
 const theme = Theme;
 
-// export const ScoreContext = React.createContext();
+export const ScoreContext = React.createContext();
 export const TopScoresContext = React.createContext();
 export const CategoryContext = React.createContext();
 
 function App() {
 
-  // const [currentScore, setCurrentScore] = useState(0);
+  const [currentScore, setCurrentScore] = useState(0);
   const [topScores, setTopScores] = useState([{user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0}, {user: "", score: 0},]);
   const [category, setCategory] = useState(-1);
 
   return (
     <ThemeProvider theme={theme}>
       <CategoryContext.Provider value={{category, setCategory}}>
-        <ScoreContextProvider>
-      {/* <ScoreContext.Provider
-          value={{currentScore, setCurrentScore}}>*/}
+      <ScoreContext.Provider
+          value={{currentScore, setCurrentScore}}>
         <TopScoresContext.Provider 
           value={{topScores, setTopScores}}
           > 
           <div className="App">
-          <BrowserRouter>
+          <HashRouter>
             <Header/>
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -40,12 +38,11 @@ function App() {
                 <Route path="/highscores" element={<HighScores />}/>
                 <Route path="/score" element={<Score />}/>
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
           </div>
           
           </TopScoresContext.Provider>
-          </ScoreContextProvider>
-      {/* </ScoreContext.Provider> */}
+      </ScoreContext.Provider>
       </CategoryContext.Provider>
     </ThemeProvider>
   );

@@ -57,7 +57,7 @@ export const Score = () => {
         <Typography variant='h1'>
           Your Score:
         </Typography>
-        <img src={currentScore>0? HappyEmoji: badEmoji} width={200}/>
+        <img src={currentScore>0? HappyEmoji: badEmoji} width={160}/>
         <Typography sx={{fontSize: 230}}>
           {currentScore}
         </Typography>
