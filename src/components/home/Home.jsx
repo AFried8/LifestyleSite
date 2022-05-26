@@ -1,4 +1,4 @@
-import React, {useState, useReducer, useEffect, useContext} from "react";
+import React, {useState, useContext} from "react";
 import {Box, Modal, Grid, Button, IconButton, Card, Typography, ToggleButton, ToggleButtonGroup} from '@mui/material';
 import PlayCircleIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,7 @@ export const Home = () => {
 
   const {category, setCategory} = useContext(CategoryContext);
   const [popup, setPopup] = useState(false);
+
   function togglePopup(){
     const newStatus = !popup;
     setPopup(newStatus);
@@ -50,7 +51,6 @@ const CategorySelection = (props) => {
     else {
       props.setCategory(selectedCategory);
     }
-    console.log(props.currentCategory);
   };
 
   return (
@@ -88,7 +88,7 @@ const PlayButton = (props) => {
   
   return (
     <IconButton 
-      disabled={props.category.category == 'noSelection'}
+      disabled={props.category == -1}
       onClick={props.openPopup}
       >
       <PlayCircleIcon style={{ color: buttonColor, fontSize: '80px'}}/>
@@ -107,8 +107,6 @@ const Popup = (props) => {
     <div>
     <Modal
       open={props.open}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
     >
       <Box sx={{position: 'absolute',
                 top: '50%',

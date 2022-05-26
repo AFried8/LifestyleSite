@@ -5,7 +5,7 @@ import {TimeContext} from '../play/Play'
 
 export const Timer = () => {
 
-    const [time, setTime] = useState({minutes: 0, seconds: 20});
+    const [time, setTime] = useState({minutes: 1, seconds: 0});
     const {timesUp, setTimesUp} = useContext(TimeContext);
 
     useEffect (() => {

@@ -40,9 +40,8 @@ function App() {
             </Routes>
           </HashRouter>
           </div>
-          
-          </TopScoresContext.Provider>
-      </ScoreContext.Provider>
+        </TopScoresContext.Provider>
+        </ScoreContext.Provider>
       </CategoryContext.Provider>
     </ThemeProvider>
   );
